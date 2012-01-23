@@ -1,0 +1,19 @@
+
+(ns bppm.core)
+
+(def config {
+    ;; Info about the PEAR channel, and where its SVN repo is.
+    :pear {
+        :alias "channel-alias"
+        :channelUrl "pear.mydomain.com"
+        :repoUrl "http://svn.mydomain.com/pear"
+    }
+    ;; Here you can define all your libraries to package
+    :libraries [
+        { :name "name"
+          :url "http://github.com/user/repo
+          :type :git
+          :packageCommand "phing pear-package -D=$VERSION" }
+    ]
+})
+
