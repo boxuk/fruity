@@ -32,8 +32,8 @@
 (defn make-package
     "Build a package for a library"
     [library tag]
-    (do (checkout library tag)
-        (util/run-command (package-command library tag) "build/repo")))
+    (checkout library tag)
+    (util/run-command (package-command library tag) "build/repo"))
 
 ;; Git
 
@@ -44,8 +44,8 @@
 
 (defmethod checkout :git
     [library tag]
-    (do (checkout-library library "git clone %s %s")
-        (util/run-command (str "git checkout -q v" tag) "build/repo")))
+    (checkout-library library "git clone %s %s")
+    (util/run-command (str "git checkout -q v" tag) "build/repo"))
 
 ;; SVN
 
