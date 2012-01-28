@@ -19,18 +19,23 @@
         (split-versions next-version)
     ))
 
+(defn- exec
+    "Execute a command and return lines of output"
+    [command dir]
+    (let [process (.. Runtime getRuntime (exec (str command) nil
+                                         (java.io.File. dir)))]
+        (line-seq (io/make-reader (.getInputStream process) {}))))
+
 ;; Public
 
 (defn run-command 
     "Execute a command and return a sequence of lines of output"
     ([command] (run-command command "."))
     ([command dir] 
-        (println "# " command)
-        (let [process (.. Runtime getRuntime (exec (str command) nil
-                                             (java.io.File. dir)))]
-            (let [lines (line-seq (io/make-reader (.getInputStream process) {}))]
-                (doseq [line lines] (println line))
-                lines))))
+        (println "# " command " (dir: '" dir "')")
+        (let [lines (exec command dir)]
+            (doseq [line lines] (println line))
+            lines)))
 
 (defn run-commands
     "Run a series of commands"

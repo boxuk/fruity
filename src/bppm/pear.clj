@@ -36,8 +36,8 @@
     (util/run-command (format "pirum add build/pear build/repo/%s-%s.tgz"
                            (:name library) tag))
     (channel-add-files)
-    (util/run-command (format "svn ci -m '%s %s' " (:name library) tag)
-                      "build/pear"))
+    (util/run-command (format "svn ci -m '%s %s' build/pear" 
+                           (:name library) tag)))
 
 ;; Public
 
