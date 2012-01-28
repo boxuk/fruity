@@ -25,8 +25,8 @@
     "Add any unknown files in the channel repo"
     []
     (let [lines (util/run-command "svn st build/pear")
-          unknown (filter #(re-matches #"^\\?(.*)" %) lines)]
-        (doseq [file unknown]
+          unknownFiles (filter #(re-matches #"^\\?(.*)" %) lines)]
+        (doseq [file unknownFiles]
             (util/run-command (format "svn add %s"
                                       (.substring file 2))))))
 
@@ -36,7 +36,7 @@
     (util/run-command (format "pirum add build/pear build/repo/%s-%s.tgz"
                            (:name library) tag))
     (channel-add-files)
-    (util/run-command (format "svn ci -m '%s %s' build/pear" 
+    (util/run-command (format "svn ci -m '%s-%s' build/pear" 
                            (:name library) tag)))
 
 ;; Public
@@ -48,7 +48,7 @@
     (let [command (format "pear list-all -c %s" channel)]
         (reduce to-map {}
             (map package-info 
-                (drop 3 (util/run-command command))) )))
+                (drop 3 (util/run-command command))))))
 
 (defn commit-package
     "Commit a package that has been built"
