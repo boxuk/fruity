@@ -14,6 +14,8 @@
           :url "http://github.com/user/repo
           :type :git
           :packageCommand "phing pear-package -D=$VERSION" }
+        ; there is also a helper for Github projects
+        (github "user" "project")
     ],
     :debug false
 })
