@@ -1,5 +1,6 @@
 
 (ns bppm.util
+    (:use bppm.config)
     (:require [clojure.java.io :as io]
               [clojure.string :as string]))
 
@@ -26,6 +27,13 @@
                                          (java.io.File. dir)))]
         (line-seq (io/make-reader (.getInputStream process) {}))))
 
+(defn- debug
+    "Debug output to commands"
+    [lines]
+    (if (config :debug)
+        (doseq [line lines]
+            (println line))))
+
 ;; Public
 
 (defn run-command 
@@ -34,7 +42,7 @@
     ([command dir] 
         (println "# " command " (dir: '" dir "')")
         (let [lines (exec command dir)]
-            (doseq [line lines] (println line))
+            (debug lines)
             lines)))
 
 (defn run-commands

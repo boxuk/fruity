@@ -1,23 +1,22 @@
 
 (ns bppm.core
     (:gen-class)
+    (:use bppm.config)
     (:require [bppm.util :as util]
               [bppm.pear :as pear]
               [bppm.library :as library]))
-
-(def ^:dynamic config)
 
 (defn build-package
     "Builds a specified package for a library"
     [library tag]
     (println (format "Build package '%s'" tag))
     (library/make-package library tag)
-    (pear/commit-package (:pear config) library tag))
+    (pear/commit-package (config :pear) library tag))
 
 (defn latest-version
     "Fetch the latest version of the library in PEAR channel (or 0.0.0)"
     [library]
-    (get (pear/channel-info (:alias (:pear config)))
+    (get (pear/channel-info (:alias (config :pear)))
          (keyword (:name library))
          "0.0.0"))
 
@@ -37,7 +36,7 @@
 (defn check-libraries
     "Checks all configured libraries for new packages"
     []
-    (doseq [library (:libraries config) ]
+    (doseq [library (config :libraries) ]
         (check-library library)))
 
 (defn -main[& args]

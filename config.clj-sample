@@ -1,7 +1,7 @@
 
-(ns bppm.core)
+(ns bppm.config)
 
-(def config {
+(def data {
     ;; Info about the PEAR channel, and where its SVN repo is.
     :pear {
         :alias "channel-alias"
@@ -14,6 +14,7 @@
           :url "http://github.com/user/repo
           :type :git
           :packageCommand "phing pear-package -D=$VERSION" }
-    ]
+    ],
+    :debug false
 })
 
