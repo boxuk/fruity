@@ -1,5 +1,5 @@
 
-(ns boxuk.ppm.config)
+(ns boxuk.fruity.config)
 
 (def data {
     ;; Info about the PEAR channel, and where its SVN repo is.

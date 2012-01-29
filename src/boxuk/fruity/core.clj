@@ -1,10 +1,10 @@
 
-(ns boxuk.ppm.core
+(ns boxuk.fruity.core
     (:gen-class)
-    (:use boxuk.ppm.config)
-    (:require [boxuk.ppm.util :as util]
-              [boxuk.ppm.pear :as pear]
-              [boxuk.ppm.library :as library]))
+    (:use boxuk.fruity.config)
+    (:require [boxuk.fruity.util :as util]
+              [boxuk.fruity.pear :as pear]
+              [boxuk.fruity.library :as library]))
 
 (defn build-package
     "Builds a specified package for a library"

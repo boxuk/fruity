@@ -1,6 +1,6 @@
 
-(ns boxuk.ppm.library
-    (:require [boxuk.ppm.util :as util]))
+(ns boxuk.fruity.library
+    (:require [boxuk.fruity.util :as util]))
 
 (defn- package-command
     "Returns the command to package the library"
