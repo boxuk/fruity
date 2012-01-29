@@ -1,6 +1,6 @@
 
-(ns bppm.pear
-    (:require [bppm.util :as util]))
+(ns boxuk.ppm.pear
+    (:require [boxuk.ppm.util :as util]))
 
 (defn- package-info
     "Parse package info from pear channel string"

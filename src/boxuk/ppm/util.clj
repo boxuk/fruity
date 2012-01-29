@@ -1,6 +1,6 @@
 
-(ns bppm.util
-    (:use bppm.config)
+(ns boxuk.ppm.util
+    (:use boxuk.ppm.config)
     (:require [clojure.java.io :as io]
               [clojure.string :as string]))
 

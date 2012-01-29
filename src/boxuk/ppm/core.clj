@@ -1,10 +1,10 @@
 
-(ns bppm.core
+(ns boxuk.ppm.core
     (:gen-class)
-    (:use bppm.config)
-    (:require [bppm.util :as util]
-              [bppm.pear :as pear]
-              [bppm.library :as library]))
+    (:use boxuk.ppm.config)
+    (:require [boxuk.ppm.util :as util]
+              [boxuk.ppm.pear :as pear]
+              [boxuk.ppm.library :as library]))
 
 (defn build-package
     "Builds a specified package for a library"

@@ -1,6 +1,6 @@
 
-(ns bppm.test.util
-    (:use [bppm.util]
+(ns boxuk.ppm.test.util
+    (:use [boxuk.ppm.util]
           [clojure.test]))
     
 (deftest test-later-version?

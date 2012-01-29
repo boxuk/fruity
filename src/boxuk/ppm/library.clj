@@ -1,6 +1,6 @@
 
-(ns bppm.library
-    (:require [bppm.util :as util]))
+(ns boxuk.ppm.library
+    (:require [boxuk.ppm.util :as util]))
 
 (defn- package-command
     "Returns the command to package the library"
