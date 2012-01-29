@@ -7,7 +7,7 @@ building the packages and adding them to a PEAR channel.
 
 ## Usage
 
-When you have everything set up Running Fruity is as simple as editing the config
+When you have everything set up running Fruity is as simple as editing the config
 file and then calling the binary.
 
 <pre>
@@ -33,7 +33,7 @@ http://pirum.sensiolabs.org/
 </pre>
 
 When your channel is created you can create your config file.  You can copy
-the config.clj-sample file provided with BPPM, rename it to whatever you like
+the config.clj-sample file provided with Fruity, rename it to whatever you like
 and go put it in version control somewhere.
 
 When you've edited your config file you can then run Fruity as indicated above.
