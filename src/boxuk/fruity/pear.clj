@@ -1,6 +1,6 @@
 
 (ns boxuk.fruity.pear
-    (:require [boxuk.fruity.util :as util]))
+    (use boxuk.fruity.util))
 
 (defn- package-info
     "Parse package info from pear channel string"
@@ -17,38 +17,35 @@
 (defn- channel-checkout
     "Checkout the PEAR channel"
     [pear]
-    (util/run-commands "rm -rf build/pear"
-                       "mkdir -p build"
-                       (format "svn co %s build/pear" (:repoUrl pear))))
+    (sh-str "rm -rf build/pear")
+    (sh-str "mkdir -p build")
+    (sh-str (format "svn co %s build/pear" (:repoUrl pear))))
 
 (defn- channel-add-files
     "Add any unknown files in the channel repo"
     []
-    (let [lines (util/run-command "svn st build/pear")
+    (let [lines (sh-str "svn st build/pear")
           unknownFiles (filter #(re-matches #"^\\?(.*)" %) lines)]
         (doseq [file unknownFiles]
-            (util/run-command (format "svn add %s"
-                                      (.substring file 2))))))
+            (sh-str (format "svn add %s" (.substring file 2))))))
 
 (defn- channel-commit
     "Commit the built package to the channel"
     [pear library tag]
-    (util/run-command (format "pirum add build/pear build/repo/%s-%s.tgz"
-                           (:name library) tag))
+    (sh-str (format "pirum add build/pear build/repo/%s-%s.tgz" (:name library) tag))
     (channel-add-files)
-    (util/run-command (format "svn ci -m '%s-%s' build/pear" 
-                           (:name library) tag)))
+    (sh-str (format "svn ci -m '%s-%s' build/pear" (:name library) tag)))
 
 ;; Public
 
 (defn channel-info
     "Fetch package information for the specified channel"
     [channel]
-    (util/run-command "pear clear-cache")
+    (sh-str "pear clear-cache")
     (let [command (format "pear list-all -c %s" channel)]
         (reduce to-map {}
             (map package-info 
-                (drop 3 (util/run-command command))))))
+                (drop 3 (sh-str command))))))
 
 (defn commit-package
     "Commit a package that has been built"

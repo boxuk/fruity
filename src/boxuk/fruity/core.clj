@@ -1,9 +1,9 @@
 
 (ns boxuk.fruity.core
     (:gen-class)
-    (:use boxuk.fruity.config)
-    (:require [boxuk.fruity.util :as util]
-              [boxuk.fruity.pear :as pear]
+    (:use boxuk.fruity.config
+          boxuk.versions)
+    (:require [boxuk.fruity.pear :as pear]
               [boxuk.fruity.library :as library]))
 
 (defn build-package
@@ -23,7 +23,7 @@
 (defn unpackaged-tags
     "Fetch new tags for the specified library"
     [library]
-    (filter (partial util/later-version? (latest-version library)) 
+    (filter (partial later-version? (latest-version library)) 
             (library/tags library)))
 
 (defn check-library
@@ -42,5 +42,6 @@
 (defn -main[& args]
     (let [config-file (first args)]
         (load-file config-file)
-        (check-libraries)))
+        (check-libraries)
+        (shutdown-agents)))
 
