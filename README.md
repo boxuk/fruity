@@ -11,7 +11,7 @@ When you have everything set up running Fruity is as simple as editing the confi
 file and then calling the binary.
 
 <pre>
-java -jar fruity-1.0.0.jar /path/to/config.clj
+java -jar fruity.jar /path/to/config.clj
 </pre>
 
 It's suggested to run this via a CI server (eg. Jenkins) or maybe just cron.
