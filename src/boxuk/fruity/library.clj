@@ -34,7 +34,8 @@
     "Build a package for a library"
     [library tag]
     (checkout library tag)
-    (sh-str (package-command library tag) "build/repo"))
+    (with-sh-dir "build/repo"
+        (sh-str (package-command library tag))))
 
 ;; Git
 

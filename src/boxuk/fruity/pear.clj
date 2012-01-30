@@ -26,7 +26,7 @@
 
 (defn- channel-commit
     "Commit the built package to the channel"
-    [pear library tag]
+    [library tag]
     (sh-str (format "pirum add build/pear build/repo/%s-%s.tgz" (:name library) tag))
     (channel-add-files)
     (sh-str (format "svn ci -m '%s-%s' build/pear" (:name library) tag)))
@@ -45,5 +45,5 @@
     "Commit a package that has been built"
     [pear library tag]
     (channel-checkout pear)
-    (channel-commit pear library tag))
+    (channel-commit library tag))
 
