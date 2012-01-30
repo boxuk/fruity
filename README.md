@@ -1,4 +1,3 @@
-
 # Fruity - The Box UK Pear Package Manager
 
 Fruity is a tool for monitoring repositories which contain libraries that can be
@@ -10,9 +9,9 @@ building the packages and adding them to a PEAR channel.
 When you have everything set up running Fruity is as simple as editing the config
 file and then calling the binary.
 
-<pre>
+```bash
 java -jar fruity.jar /path/to/config.clj
-</pre>
+```
 
 It's suggested to run this via a CI server (eg. Jenkins) or maybe just cron.
 Fruity is essentially just a wrapper for a bunch of other tools.
@@ -21,6 +20,14 @@ Fruity is essentially just a wrapper for a bunch of other tools.
 * SVN
 * Pirum
 * Git
+
+## Building Fruity
+
+To build the Fruity JAR file just use [Leiningen](https://github.com/technomancy/leiningen).
+
+```bash
+lein uberjar
+```
 
 ## Setting It Up
 
