@@ -6,10 +6,10 @@
 (defn github
     "Create a library config for Github"
     ([user project] (github user project project))
-    ([user project name]
+    ([user project repo]
         {:name name
          :type :git
-         :url (format "https://github.com/%s/%s" user project)
+         :url (format "https://github.com/%s/%s" user repo)
          :packageCommand "phing pear-package -Dversion=$VERSION"}))
 
 (defn config
