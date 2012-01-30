@@ -4,15 +4,10 @@
 
 (defn- package-info
     "Parse package info from pear channel string"
-    [string]
-    (rest (re-matches
-        #"^.*?/(.*?)\s+(\d+\.\d+\.\d+).*" string)))
-
-(defn- to-map
-    "Change list of name and value into map"
-    [acc e]
-    (assoc acc (keyword (first e))
-               (second e)))
+    [acc string]
+    (let [regexp #"^.*?/(.*?)\s+(\d+\.\d+\.\d+).*"
+          [name version] (rest (re-matches regexp string))]
+        (assoc acc (keyword name) version)))
 
 (defn- channel-checkout
     "Checkout the PEAR channel"
@@ -43,9 +38,8 @@
     [channel]
     (sh-str "pear clear-cache")
     (let [command (format "pear list-all -c %s" channel)]
-        (reduce to-map {}
-            (map package-info 
-                (drop 3 (sh-str command))))))
+        (reduce package-info {}
+            (drop 3 (sh-str command)))))
 
 (defn commit-package
     "Commit a package that has been built"
