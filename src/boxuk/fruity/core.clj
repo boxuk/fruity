@@ -2,9 +2,12 @@
 (ns boxuk.fruity.core
     (:gen-class)
     (:use boxuk.fruity.config
+          boxuk.toolchain
           boxuk.versions)
     (:require [boxuk.fruity.pear :as pear]
               [boxuk.fruity.library :as library]))
+
+(def required-binaries ["svn" "pirum" "pear"])
 
 (defn build-package
     "Builds a specified package for a library"
@@ -40,6 +43,7 @@
         (check-library library)))
 
 (defn -main[& args]
+    (check-binaries required-binaries)
     (let [config-file (first args)]
         (load-file config-file)
         (check-libraries)
