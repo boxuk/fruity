@@ -1,8 +1,9 @@
-# Fruity - The Box UK Pear Package Manager
+# Fruity - The Box UK Package Manager
 
 Fruity is a tool for monitoring repositories which contain libraries that can be
-built as PEAR packages.  When tags are made in these repositories Fruity handles
-building the packages and adding them to a PEAR channel.
+built as packages.  When tags are made in these repositories Fruity handles
+building the packages and adding them to whatever distribution method that library
+may be using (eg. PEAR channel, or Clojars).
 
 ## Usage
 

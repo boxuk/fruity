@@ -4,7 +4,9 @@
     (:use boxuk.fruity.config
           boxuk.toolchain
           boxuk.versions)
-    (:require [boxuk.fruity.pear :as pear]
+    (:require [boxuk.fruity.backend :as backend]
+              [boxuk.fruity.backend.pear]
+              [boxuk.fruity.backend.clojars]
               [boxuk.fruity.library :as library]))
 
 (def required-binaries ["svn" "pirum" "pear"])
@@ -13,20 +15,13 @@
     "Builds a specified package for a library"
     [library tag]
     (println (format "Build package '%s'" tag))
-    (library/make-package library tag)
-    (pear/commit-package (config :pear) library tag))
-
-(defn latest-version
-    "Fetch the latest version of the library in PEAR channel (or 0.0.0)"
-    [library]
-    (get (pear/channel-info (:alias (config :pear)))
-         (keyword (:name library))
-         "0.0.0"))
+    (library/checkout library tag)
+    (backend/deploy library tag))
 
 (defn unpackaged-tags
     "Fetch new tags for the specified library"
     [library]
-    (filter (partial later-version? (latest-version library)) 
+    (filter (partial later-version? (backend/latest-version library)) 
             (library/tags library)))
 
 (defn check-library

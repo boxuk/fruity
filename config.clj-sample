@@ -10,12 +10,19 @@
     }
     ;; Here you can define all your libraries to package
     :libraries [
+        ; PEAR library
         { :name "name"
           :url "http://github.com/user/repo
-          :type :git
+          :scm :git
+          :type :pear
           :packageCommand "phing pear-package -D=$VERSION" }
+        ; Clojars
+        { :name "name"
+          :url "http://svn.mydomain.com/project"
+          :scm :svn
+          :type :clojars }
         ; there is also a helper for Github projects
-        (github "user" "project")
+        (github :pear "user" "project")
     ],
     :debug false
 })

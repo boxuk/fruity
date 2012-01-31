@@ -3,13 +3,6 @@
     (:use boxuk.fruity.util
           clojure.java.shell))
 
-(defn- package-command
-    "Returns the command to package the library"
-    [library tag]                     
-    (let [default "phing pear-package -Dversion=$VERSION"
-          command (:packageCommand library default)]
-        (.replaceAll command "\\$VERSION" tag)))
-
 (defn- tags-from
     "Fetch tags using the specified command and regexp"
     [command regexp]
@@ -26,16 +19,9 @@
 
 ;; Public
 
-(defmulti tags :type)
+(defmulti tags :scm)
 
-(defmulti checkout :type)
-
-(defn make-package
-    "Build a package for a library"
-    [library tag]
-    (checkout library tag)
-    (with-sh-dir "build/repo"
-        (sh-str (package-command library tag))))
+(defmulti checkout :scm)
 
 ;; Git
 
