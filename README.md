@@ -3,7 +3,7 @@
 Fruity is a tool for monitoring repositories which contain libraries that can be
 built as packages.  When tags are made in these repositories Fruity handles
 building the packages and adding them to whatever distribution method that library
-may be using.  At the moment Fruity supports PEAR packages for PHP, and CLojars libraries
+may be using.  At the moment Fruity supports PEAR packages for PHP, and Clojars libraries
 for Clojure projects.
 
 ## Usage
