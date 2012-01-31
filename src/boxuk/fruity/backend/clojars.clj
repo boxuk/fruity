@@ -10,16 +10,16 @@
     "Perform a search of clojars for the specified library"
     [library]
     (let [url (format "http://clojars.org/search?q=%s&format=json" (:name library))]
-        (parse-stream (io/reader url) true)))
+        (:results (parse-stream (io/reader url) true))))
 
 ;; Public
 
 (defmethod latest-version :clojars
     [library]
-    (let [json (search-json library)]
-        (if (= 1 (:count json))
-            (:version (first (:results json)))
-            "0.0.0")))
+    (let [default "0.0.0"]
+        (:version (first (filter #(= (:name library) (:jar_name %)) 
+                                  (search-json library)))
+                  default)))
 
 (defmethod deploy :clojars
     [library tag]
