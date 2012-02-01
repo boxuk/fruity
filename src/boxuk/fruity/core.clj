@@ -11,6 +11,8 @@
               [boxuk.fruity.backend.pear]
               [boxuk.fruity.backend.clojars]))
 
+;; Binary Checking
+
 (def binaries {
     :pear       ["svn" "pirum" "pear"]
     :clojars    ["lein" "scp"]
@@ -26,6 +28,8 @@
     [libraries]
     (reduce #(concat %1 (%2 binaries)) []
              (required-backends libraries)))
+
+;; Library Checking
 
 (defn- build-package
     "Builds a specified package for a library"
@@ -53,12 +57,16 @@
     (doseq [library (config :libraries) ]
         (check-library library)))
 
+;; Plugins
+
 (defn- load-plugins
     "Loads any plugins via config"
     []
     (doseq [plugin-type [:backend :scm]]
         (doseq [plugin (plugin-type (config :plugins))]
             (load-file plugin))))
+
+;; Public
 
 (defn -main[& args]
     (let [config-file (first args)]
