@@ -100,6 +100,12 @@ the user/organisation name, and the project name.
 The optional third argument is a map that can override any other the config parameters
 you need to tweak.
 
+## Plugins
+
+If you're using an SCM or a repository that's not supported you can add these via a plugin.
+Check out the sample file, and the current implementations to see how.  If you do write your
+own plugins please own a pull request to contribute them back!
+
 ## License
 
 Dual licensed under GPLv2 and MIT.
