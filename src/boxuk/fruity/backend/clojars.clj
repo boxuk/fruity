@@ -15,15 +15,14 @@
 ;; Public
 
 (defmethod latest-version :clojars
-    [library]
-    (let [name (:name library)]
-        (:version (first (filter #(= name (:jar_name %)) 
-                                  (search-json name)))
-                  "0.0.0")))
+    [{:keys [name]}]
+    (:version (first (filter #(= name (:jar_name %)) 
+                              (search-json name)))
+              "0.0.0"))
 
 (defmethod deploy :clojars
-    [library tag]
-    (let [jar-name (format "%s-%s.jar" (:name library) tag)]
+    [{:keys [name]} tag]
+    (let [jar-name (format "%s-%s.jar" name tag)]
         (with-sh-dir "build/repo"
             (sh-str "lein pom")
             (sh-str "lein jar")

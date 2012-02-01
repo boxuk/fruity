@@ -85,6 +85,21 @@ projects just give the path to the repository.
 For Git projects tag names are assumed to be in the format *vX.X.X*.  ie. a *v* as a
 prefix and then the version number.
 
+## Github Helper
+
+When specifying your library config there's also a Github helper function which takes
+the user/organisation name, and the project name.
+
+```clojure
+:libraries [
+    (github "user" "project")
+    (github "user" "another" {:type :clojars})
+]
+```
+
+The optional third argument is a map that can override any other the config parameters
+you need to tweak.
+
 ## License
 
 Dual licensed under GPLv2 and MIT.

@@ -5,13 +5,13 @@
 
 (defn github
     "Create a library config for Github"
-    ([type user project] (github user project project))
-    ([type user project repo]
-        {:name project
-         :scm :git
-         :type type
-         :url (format "https://github.com/%s/%s" user repo)
-         :packageCommand "phing pear-package -Dversion=$VERSION"}))
+    ([user project] (github user project {}))
+    ([user project config]
+        (let [defaults { :name project
+                         :scm :git
+                         :type :pear
+                         :url (format "https://github.com/%s/%s" user project) }]
+              (merge defaults config))))
 
 (defn config
     "Get a configuration property"
