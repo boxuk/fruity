@@ -32,6 +32,15 @@
 
     ],
 
+    :plugins {
+        :backend [
+            ; "/path/to/backend/plugin.clj"
+        ]
+        :library [
+            ; "/path/to/library/plugin.clj
+        ]
+    }
+
     :debug false
 
 })

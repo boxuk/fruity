@@ -6,7 +6,6 @@
           boxuk.versions)
     (:require [boxuk.fruity.backend :as backend]
               [boxuk.fruity.library :as library]
-              ; @todo load dynamically
               [boxuk.fruity.library.git]
               [boxuk.fruity.library.svn]
               [boxuk.fruity.backend.pear]
@@ -54,9 +53,17 @@
     (doseq [library (config :libraries) ]
         (check-library library)))
 
+(defn- load-plugins
+    "Loads any plugins via config"
+    []
+    (doseq [plugin-type [:backend :library]]
+        (doseq [plugin (plugin-type (config :plugins))]
+            (load-file plugin))))
+
 (defn -main[& args]
     (let [config-file (first args)]
         (load-file config-file)
+        (load-plugins)
         (check-binaries (required-binaries (config :libraries)))
         (check-libraries)
         (shutdown-agents)))
