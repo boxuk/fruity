@@ -1,6 +1,6 @@
 
-(ns boxuk.fruity.library.svn
-    (:use boxuk.fruity.library
+(ns boxuk.fruity.scm.svn
+    (:use boxuk.fruity.scm
           boxuk.fruity.util
           clojure.java.shell))
 
@@ -11,5 +11,5 @@
 
 (defmethod checkout :svn
     [library tag]
-    (checkout-library library (str "svn co %s/tags/" tag " %s")))
+    (checkout-for library (str "svn co %s/tags/" tag " %s")))
 

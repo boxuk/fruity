@@ -28,7 +28,7 @@
           :type :clojars }
 
         ; there is also a helper for Github projects
-        (github :pear "user" "project")
+        (github "user" "project" {:type :clojars})
 
     ],
 
@@ -36,8 +36,8 @@
         :backend [
             ; "/path/to/backend/plugin.clj"
         ]
-        :library [
-            ; "/path/to/library/plugin.clj
+        :scm [
+            ; "/path/to/scm/plugin.clj
         ]
     }
 

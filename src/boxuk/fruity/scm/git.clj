@@ -1,6 +1,6 @@
 
-(ns boxuk.fruity.library.git
-    (:use boxuk.fruity.library
+(ns boxuk.fruity.scm.git
+    (:use boxuk.fruity.scm
           boxuk.fruity.util
           clojure.java.shell))
 
@@ -11,7 +11,7 @@
 
 (defmethod checkout :git
     [library tag]
-    (checkout-library library "git clone %s %s")
+    (checkout-for library "git clone %s %s")
     (with-sh-dir "build/repo"
         (sh-str (str "git checkout -q v" tag))))
 

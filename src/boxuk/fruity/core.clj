@@ -5,9 +5,9 @@
           boxuk.toolchain
           boxuk.versions)
     (:require [boxuk.fruity.backend :as backend]
-              [boxuk.fruity.library :as library]
-              [boxuk.fruity.library.git]
-              [boxuk.fruity.library.svn]
+              [boxuk.fruity.scm :as scm]
+              [boxuk.fruity.scm.git]
+              [boxuk.fruity.scm.svn]
               [boxuk.fruity.backend.pear]
               [boxuk.fruity.backend.clojars]))
 
@@ -31,14 +31,14 @@
     "Builds a specified package for a library"
     [library tag]
     (println (format "Build package '%s'" tag))
-    (library/checkout library tag)
+    (scm/checkout library tag)
     (backend/deploy library tag))
 
 (defn- unpackaged-tags
     "Fetch new tags for the specified library"
     [library]
     (filter (partial later-version? (backend/latest-version library)) 
-            (library/tags library)))
+            (scm/tags library)))
 
 (defn- check-library
     "Checks a library for new tags and builds them if needed"
@@ -56,7 +56,7 @@
 (defn- load-plugins
     "Loads any plugins via config"
     []
-    (doseq [plugin-type [:backend :library]]
+    (doseq [plugin-type [:backend :scm]]
         (doseq [plugin (plugin-type (config :plugins))]
             (load-file plugin))))
 

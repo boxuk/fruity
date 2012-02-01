@@ -1,5 +1,5 @@
 
-(ns boxuk.fruity.library
+(ns boxuk.fruity.scm
     (:use boxuk.fruity.util
           clojure.java.shell))
 
@@ -12,7 +12,7 @@
         (remove nil? 
             (map parse-tag (sh-str command)))))
 
-(defn checkout-library
+(defn checkout-for
     "Checkout using the command"
     [library command]
     (sh-str "rm -rf build/repo")
