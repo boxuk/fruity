@@ -4,10 +4,10 @@
     (:use boxuk.fruity.config
           boxuk.toolchain
           boxuk.versions)
-    (:require [boxuk.fruity.backend :as backend]
-              [boxuk.fruity.scm :as scm]
+    (:require [boxuk.fruity.scm :as scm]
               [boxuk.fruity.scm.git]
               [boxuk.fruity.scm.svn]
+              [boxuk.fruity.backend :as backend]
               [boxuk.fruity.backend.pear]
               [boxuk.fruity.backend.clojars]))
 
