@@ -9,6 +9,7 @@
               [boxuk.fruity.scm.svn]
               [boxuk.fruity.backend :as backend]
               [boxuk.fruity.backend.pear]
+              [boxuk.fruity.backend.github-downloads]
               [boxuk.fruity.backend.clojars]))
 
 ;; Binary Checking
