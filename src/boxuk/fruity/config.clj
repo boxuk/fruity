@@ -8,6 +8,7 @@
     ([user project] (github user project {}))
     ([user project config]
         (let [defaults { :name project
+                         :user user
                          :scm :git
                          :type :pear
                          :url (format "https://github.com/%s/%s" user project) }]

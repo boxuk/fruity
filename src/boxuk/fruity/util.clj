@@ -5,12 +5,14 @@
     (:require [clojure.java.io :as io]
               [clojure.string :as string]))
 
+(def ^:dynamic *sh* sh)
+
 ;; Public
 
 (defn sh-seq
     "Run the command and return seq of lines"
     [args]
-    (let [output (:out (apply sh args))
+    (let [output (:out (apply *sh* args))
           lines (string/split output #"\n")]
         (if (config :debug) (println output))
         lines))
