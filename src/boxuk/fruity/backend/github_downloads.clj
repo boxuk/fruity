@@ -60,26 +60,25 @@
 
 (defn- upload-s3-params
     "Parameters for uploading to S3"
-    [file req]
+    [file params]
     (let [name (.getName file)]
         (into (sorted-map) {
-          :key (:path req)
-          :acl (:acl req)
+          :key (:path params)
+          :acl (:acl params)
           :success_action_status "201"
-          :Filename (:name req)
-          :AWSAccessKeyId (:accesskeyid req)
-          :Policy (:policy req)
-          :Signature (:signature req)
-          :Content-Type (:mime_type req)
+          :Filename (:name params)
+          :AWSAccessKeyId (:accesskeyid params)
+          :Policy (:policy params)
+          :Signature (:signature params)
+          :Content-Type (:mime_type params)
           :file (slurp file)
         })))
 
 (defn- upload-s3
     "Upload a file to S3"
-    [file req]
-    (println (str "S3: " (upload-s3-params file req)))
+    [file params]
     (http/post "https://github.s3.amazonaws.com"
-        { :form-params (upload-s3-params file req) }))
+        { :form-params (upload-s3-params file params) }))
 
 (defn- upload
     "Upload a file to Github"
