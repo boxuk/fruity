@@ -40,7 +40,7 @@
 ;; Uploads
 
 (defn- upload-request-params
-    "Returns parameters for the first step in file upload"
+    "Parameters for the first step in file upload"
     [library file]
     (let [name (.getName file)]
         { :basic-auth (:basic-auth library)
@@ -50,11 +50,10 @@
               :description name
               :content_type (URLConnection/guessContentTypeFromName name)
           })
-          :throw-exceptions false
         }))
 
 (defn- upload-request
-    "Does first stage of the request to upload a file"
+    "Fetches upload request parameters, for saving to S3"
     [library file]
     (http/post (api-url library)
         (upload-request-params library file)))
@@ -62,28 +61,33 @@
 (defn- upload-s3-params
     "Parameters for uploading to S3"
     [file req]
-    { :key (:path req)
-      :acl "public-read"
-      :success_action_status "201"
-      :Filename (.getName file)
-      :AWSAccessKeyId (:accesskeyid req)
-      :Policy (:policy req)
-      :Signature (:signature req)
-      :Content-Type (URLConnection/guessContentTypeFromName (.getName file))
-      :file (slurp file)
-    })
+    (let [name (.getName file)]
+        (into (sorted-map) {
+          :key (:path req)
+          :acl (:acl req)
+          :success_action_status "201"
+          :Filename (:name req)
+          :AWSAccessKeyId (:accesskeyid req)
+          :Policy (:policy req)
+          :Signature (:signature req)
+          :Content-Type (:mime_type req)
+          :file (slurp file)
+        })))
 
 (defn- upload-s3
     "Upload a file to S3"
     [file req]
+    (println (str "S3: " (upload-s3-params file req)))
     (http/post "https://github.s3.amazonaws.com"
         { :form-params (upload-s3-params file req) }))
 
 (defn- upload
     "Upload a file to Github"
     [library]
-    (let [file (File. (:archive library))]
-        (upload-s3 file (upload-request library file))))
+    (let [file (File. (:archive library))
+          req (upload-request library file)
+          params (parse-string (:body req) true)]
+              (upload-s3 file params)))
 
 ;; Public
 
