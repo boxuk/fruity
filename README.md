@@ -12,7 +12,7 @@ When you have everything set up running Fruity is as simple as editing the confi
 file and then calling the binary.
 
 ```bash
-java -jar fruity.jar /path/to/config.clj
+./bin/fruity /path/to/config.clj
 ```
 
 It's suggested to run this via a CI server (eg. Jenkins), or maybe just cron.
@@ -26,10 +26,11 @@ Fruity is essentially just a wrapper for a bunch of other tools like...
 
 ## Building Fruity
 
-To build the Fruity JAR file just use [Leiningen](https://github.com/technomancy/leiningen).
+To build the Fruity executable just use the script provided (which requires [Leiningen](https://github.com/technomancy/leiningen)
+if you don't have it already).
 
 ```bash
-lein uberjar
+./scripts/make-binary.sh
 ```
 
 ## Fruity Config File
