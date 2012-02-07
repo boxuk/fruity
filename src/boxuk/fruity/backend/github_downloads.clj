@@ -62,7 +62,7 @@
     "Parameters for uploading to S3"
     [file params]
     (let [name (.getName file)]
-        (into (sorted-map) {
+        {
           :key (:path params)
           :acl (:acl params)
           :success_action_status "201"
@@ -72,12 +72,12 @@
           :Signature (:signature params)
           :Content-Type (:mime_type params)
           :file (slurp file)
-        })))
+        }))
 
 (defn- upload-s3
     "Upload a file to S3"
     [file params]
-    (http/post "https://github.s3.amazonaws.com"
+    (http/post (:s3_url params)
         { :form-params (upload-s3-params file params) }))
 
 (defn- upload
