@@ -6,5 +6,5 @@
                    [boxuk.versions "0.1.0"]
                    [boxuk.toolchain "0.0.2"]]
     :main boxuk.fruity.core
-    :uberjar-name "fruity.jar")
+    :plugins [[lein-bin "0.1.2"]])
 

@@ -11,4 +11,4 @@
 build
 config.clj
 hardcopy.*
-bin/fruity
+boxuk.fruity*

@@ -26,12 +26,13 @@ Fruity is essentially just a wrapper for a bunch of other tools like...
 
 ## Building Fruity
 
-To build the Fruity executable just use the script provided (which requires [Leiningen](https://github.com/technomancy/leiningen)
-if you don't have it already).
+To build the Fruity executable just use [Leiningen](https://github.com/technomancy/leiningen).
 
 ```bash
-./scripts/make-binary.sh
+lein bin
 ```
+
+This will leave you with an executable _boxuk.fruity-1.0.0_.
 
 ## Fruity Config File
 
