@@ -62,8 +62,7 @@
     "Parameters for uploading to S3"
     [file params]
     (let [name (.getName file)]
-        {
-          :key (:path params)
+        { :key (:path params)
           :acl (:acl params)
           :success_action_status "201"
           :Filename (:name params)
@@ -71,8 +70,7 @@
           :Policy (:policy params)
           :Signature (:signature params)
           :Content-Type (:mime_type params)
-          :file (slurp file)
-        }))
+          :file (slurp file) }))
 
 (defn- upload-s3
     "Upload a file to S3"
