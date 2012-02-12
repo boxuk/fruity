@@ -62,21 +62,22 @@
     "Parameters for uploading to S3"
     [file params]
     (let [name (.getName file)]
-        { :key (:path params)
-          :acl (:acl params)
-          :success_action_status "201"
-          :Filename (:name params)
-          :AWSAccessKeyId (:accesskeyid params)
-          :Policy (:policy params)
-          :Signature (:signature params)
-          :Content-Type (:mime_type params)
-          :file (slurp file) }))
+        (array-map 
+            :key (:path params)
+            :acl (:acl params)
+            :success_action_status "201"
+            :Filename (:name params)
+            :AWSAccessKeyId (:accesskeyid params)
+            :Policy (:policy params)
+            :Signature (:signature params)
+            :Content-Type (:mime_type params)
+            :file (slurp file))))
 
 (defn- upload-s3
     "Upload a file to S3"
     [file params]
     (http/post (:s3_url params)
-        { :form-params (upload-s3-params file params) }))
+        { :multipart (upload-s3-params file params) }))
 
 (defn- upload
     "Upload a file to Github"
