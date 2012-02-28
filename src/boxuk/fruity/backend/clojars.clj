@@ -10,7 +10,8 @@
     "Perform a search of clojars for the specified library"
     [name]
     (let [url (format "http://clojars.org/search?q=%s&format=json" name)]
-        (:results (parse-stream (io/reader url) true))))
+        (with-open [in (io/reader url)]
+            (:results (parse-stream in true)))))
 
 ;; Public
 

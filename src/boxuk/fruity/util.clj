@@ -2,8 +2,7 @@
 (ns boxuk.fruity.util
     (:use boxuk.fruity.config
           clojure.java.shell)
-    (:require [clojure.java.io :as io]
-              [clojure.string :as string]))
+    (:require [clojure.string :as string]))
 
 ;; Public
 
